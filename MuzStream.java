@@ -2,7 +2,8 @@
  * MuzStream requests playlistCapacity playlistLimit numberofFillings K
  */
 import ca.umontreal.adt.list.FavoritesListMTF;
-import java.util.ArrayList;
+import ca.umontreal.adt.queue.LinkedQueue;
+import ca.umontreal.adt.queue.Queue;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -21,7 +22,7 @@ public class MuzStream {
         int timePassed;
         
         //list for stocking all the songs in the request file
-        ArrayList<Song> songList = new ArrayList<>();
+        Queue<Song> songList = new LinkedQueue()<>();
         
         //create a playlist.
         Playlist playlist = new Playlist();
@@ -42,15 +43,17 @@ public class MuzStream {
 	    while( reader.hasNextLine() ) {
 		line = reader.nextLine();
         String[] infoPieces = line.split("\\t");
-        System.out.println(infoPieces[0]+infoPieces[1]+infoPieces[2]);
-        songList.add(new Song(infoPieces));
+        //debug
+        //System.out.println(infoPieces[0]+infoPieces[1]+infoPieces[2]);
+        songList.enqueue(new Song(infoPieces));
 	    }
         } catch( FileNotFoundException e ) {
             System.out.println( "Something's wrong, file not found!" );
             e.printStackTrace();
 	    }
 
-        System.out.println(songList);
+        //debug
+        //System.out.println(songList);
 
     }
 }
