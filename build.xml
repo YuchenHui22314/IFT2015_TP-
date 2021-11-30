@@ -1,0 +1,110 @@
+<project name="ca.umontreal.pqueues" default="main" basedir=".">
+
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist" location="dist"/>
+  <property name="lib" location="lib"/>
+
+  <property name="main-class" value="${ant.project.name}.PQApp"/>
+  <property name="classes" value="${build}/classes"/>
+  <property name="jar" value="${build}/jar"/>
+
+  <property name="javac.max.memory" value="1g" />
+
+  <path id="classpath">
+    <fileset dir="${lib}" includes="**/*.jar"/>
+  </path>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="mkdir classes and compile the source">
+    <!-- Compile the Java code from ${src} into ${build} -->
+    <mkdir dir="${classes}"/>
+    <javac debug="on" srcdir="${src}" destdir="${classes}" >
+	   <classpath refid="classpath"/>
+    </javac>
+  </target>
+
+  <target name="dist" depends="compile"
+          description="generate the distribution">
+    <!-- Create the distribution directory -->
+    <mkdir dir="${jar}"/>
+    <!-- Put everything in ${build} into the DataBase-${DSTAMP}.jar file -->
+    <jar destfile="${jar}/${ant.project.name}-${DSTAMP}.jar" basedir="${classes}">
+      <manifest>
+        <attribute name="Main-Class" value="${main-class}"/>
+	<attribute name="Class-Path" value="
+		${lib}/HdrHistogram-2.1.12.jar
+		${lib}/akka-cluster-metrics_2.13-2.6.4.jar
+		${lib}/akka-cluster-tools_2.13-2.5.23.jar
+		${lib}/akka-stream_2.13-2.6.4.jar
+		${lib}/asm-9.1.jar
+		${lib}/asm-analysis-9.1.jar
+		${lib}/asm-commons-9.1.jar
+		${lib}/asm-tree-9.1.jar
+		${lib}/asm-util-9.1.jar
+		${lib}/config-1.4.1.jar
+		${lib}/esri-geometry-api-1.2.1.jar
+		${lib}/jackson-annotations-2.12.2.jar
+		${lib}/jackson-core-2.12.2.jar
+		${lib}/jackson-core-asl-1.9.12.jar
+		${lib}/jackson-databind-2.12.2.jar
+		${lib}/java-driver-core-4.13.0.jar
+		${lib}/java-driver-mapper-runtime-4.13.0.jar
+		${lib}/java-driver-query-builder-4.13.0.jar
+		${lib}/java-driver-shaded-guava-25.1-jre-graal-sub-1.jar
+		${lib}/java-driver-shaded-guava-25.1-jre.jar
+		${lib}/jcip-annotations-1.0-1.jar
+		${lib}/jffi-1.3.1-native.jar
+		${lib}/jffi-1.3.1.jar
+		${lib}/jnr-a64asm-1.0.0.jar
+		${lib}/jnr-constants-0.10.1.jar
+		${lib}/jnr-ffi-2.2.2.jar
+		${lib}/jnr-posix-3.1.5.jar
+		${lib}/jnr-x86asm-1.0.2.jar
+		${lib}/json-20090211.jar
+		${lib}/jsr305-3.0.2.jar
+		${lib}/junit-4.13.2.jar
+		${lib}/log4j-1.2.17.jar
+		${lib}/messaging-connectors-commons-core-1.0.13.jar
+		${lib}/metrics-core-4.1.18.jar
+		${lib}/native-protocol-1.5.0.jar
+		${lib}/netty-buffer-4.1.60.Final.jar
+		${lib}/netty-codec-4.1.60.Final.jar
+		${lib}/netty-common-4.1.60.Final.jar
+		${lib}/netty-handler-4.1.60.Final.jar
+		${lib}/netty-resolver-4.1.60.Final.jar
+		${lib}/netty-transport-4.1.60.Final.jar
+		${lib}/reactive-streams-1.0.3.jar
+		${lib}/sbt-launch-1.1.0.jar
+		${lib}/shocon_2.12-0.1.5.jar
+		${lib}/slf4j-api-1.7.26.jar
+		${lib}/slf4j-simple-1.7.25.jar
+		${lib}/spotbugs-annotations-3.1.12.jar
+	  " />
+      </manifest>
+      </jar>
+  </target>
+
+  <target name="run" depends="dist">
+    <java jar="${jar}/${ant.project.name}-${DSTAMP}.jar" fork="true">
+    </java>
+  </target>
+
+  <target name="clean"
+        description="clean up">
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+
+  <target name="main" depends="clean,run"/>
+  
+</project>
