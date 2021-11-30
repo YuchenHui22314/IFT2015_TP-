@@ -1,0 +1,85 @@
+##### LatinoAndMore
+########## Using FavoritesList
+MuzStream data/LatinoAndMore.input 40 33 84 10
+Top-10:
+Tamara	Abrazame - 12A - 4	84	5465
+Pitbull	Happy Mamá Day (feat. Chacal & Sky Monroe) - 4A - 7	83	5585
+Nylez, Clandes, Oxy Mc, Adonay, J-Manny & Jheral	Hoy Voy a Beber - 10A - 7	82	5666
+Savoir Flair	Keep Holding On - 5A - 5	43	10758
+J Dot Manswell	P.T.B.T. (Proud to Be Trini) - 12A - 6	41	11304
+José José	La Nave del Olvido - 8A - 5	40	11158
+Maluma	La Flaca (feat. Chencho Corleone) - 4A - 6	39	12088
+Lucas Piraino	Háblame Suavecito	37	12672
+Omara Portuondo & Maria Bethânia	Tal Vez - 6A - 2	37	12695
+Joe Dassin	Laisse-moi dormir - 9A/12B - 6	36	12532
+########## Using FavoritesListMTF
+MuzStream data/LatinoAndMore.input 40 33 84 10
+Top-10:
+Tamara	Abrazame - 12A - 4	84	5465
+Pitbull	Happy Mamá Day (feat. Chacal & Sky Monroe) - 4A - 7	83	5585
+Nylez, Clandes, Oxy Mc, Adonay, J-Manny & Jheral	Hoy Voy a Beber - 10A - 7	82	5666
+Savoir Flair	Keep Holding On - 5A - 5	43	10758
+J Dot Manswell	P.T.B.T. (Proud to Be Trini) - 12A - 6	41	11304
+José José	La Nave del Olvido - 8A - 5	40	11158
+Maluma	La Flaca (feat. Chencho Corleone) - 4A - 6	39	12088
+Omara Portuondo & Maria Bethânia	Tal Vez - 6A - 2	37	12695
+Lucas Piraino	Háblame Suavecito	37	12672
+Joe Dassin	Que sont devenues mes amours ? - 7B - 4	36	12957
+
+
+##### PumpThatBody
+########## Using FavoritesList
+MuzStream data/PumpThatBody.input 40 33 84 10
+Top-10:
+Clean Bandit	Rather Be (feat. Jess Glynne) [Cash Cash x Valley Remix] - 1B - 7	84	6365
+Bingo Players	Get Up (Rattle) [feat. Far East Movement] [Vocal Edit] - 4A - 7	82	6643
+Ariana Grande	Problem (feat. Iggy Azalea) - 1A - 7	81	6700
+JAY-Z	Tom Ford - 2A - 6	79	6876
+The Beastie Boys	Brass Monkey - 4A	78	7009
+Tove Lo	Habits (Stay High) [The Chainsmokers Extended Mix] - 7A - 7	77	6963
+Calvin Harris	Let's Go (feat. Ne-Yo) [Radio Edit] - 9A	77	7016
+Major Lazer	Watch Out For This (Bumaye) [feat. Busy Signal, the Flexican & FS Green] - 4A - 7	76	6968
+Daft Punk	Robot Rock	75	7253
+Azealia Banks	212 (feat. Lazy Jay) - 11A - 8	69	7865
+########## Using FavoritesListMTF
+MuzStream data/PumpThatBody.input 40 33 84 10
+Top-10:
+Clean Bandit	Rather Be (feat. Jess Glynne) [Cash Cash x Valley Remix] - 1B - 7	84	6365
+Bingo Players	Get Up (Rattle) [feat. Far East Movement] [Vocal Edit] - 4A - 7	82	6643
+Ariana Grande	Problem (feat. Iggy Azalea) - 1A - 7	81	6700
+JAY-Z	Tom Ford - 2A - 6	79	6876
+The Beastie Boys	Brass Monkey - 4A	78	7009
+Calvin Harris	Let's Go (feat. Ne-Yo) [Radio Edit] - 9A	77	7016
+Tove Lo	Habits (Stay High) [The Chainsmokers Extended Mix] - 7A - 7	77	6963
+Major Lazer	Watch Out For This (Bumaye) [feat. Busy Signal, the Flexican & FS Green] - 4A - 7	76	6968
+Daft Punk	Robot Rock	75	7253
+Azealia Banks	212 (feat. Lazy Jay) - 11A - 8	69	7865
+
+
+##### SoulAndFunk
+########## Using FavoritesList
+MuzStream data/SoulAndFunk.input 40 33 84 10
+Top-10:
+Al Wilson	How’s Your Love Life? - 5A - 6	84	7270
+The O'Jays	Rich Get Richer - 8B - 5	72	8309
+Kool & The Gang	Hollywood Swinging (Single Version) - 9A - 6	71	8442
+Sam & Dave	Soul Man - 9B/5A - 7	69	8887
+Legacy	I'm So Glad - 7A - 7	68	8843
+Tom Browne	Funkin' For Jamaica - 5A - 5	68	8911
+Apollis	What It Is, Pt. 1 - 10B - 5	67	9055
+Milton Wright	Keep It Up - 8A - 5	67	9047
+Marvin Gaye	Mercy Mercy Me (The Ecology)	66	9263
+The Isley Brothers	That Lady, Pts. 1 & 2 - 5A - 6	66	9082
+########## Using FavoritesListMTF
+MuzStream data/SoulAndFunk.input 40 33 84 10
+Top-10:
+Al Wilson	How’s Your Love Life? - 5A - 6	84	7270
+The O'Jays	Rich Get Richer - 8B - 5	72	8309
+Kool & The Gang	Hollywood Swinging (Single Version) - 9A - 6	71	8442
+Sam & Dave	Soul Man - 9B/5A - 7	69	8887
+Tom Browne	Funkin' For Jamaica - 5A - 5	68	8911
+Legacy	I'm So Glad - 7A - 7	68	8843
+Milton Wright	Keep It Up - 8A - 5	67	9047
+Apollis	What It Is, Pt. 1 - 10B - 5	67	9055
+The Isley Brothers	That Lady, Pts. 1 & 2 - 5A - 6	66	9082
+Marvin Gaye	Mercy Mercy Me (The Ecology)	66	9263

@@ -1,0 +1,41 @@
+MuzStream data/simple.input 3 33 3 2 ###### program call on simple.input with playlist capacity of 3 tracks, refilling at 33%, run for 3 refills, and report Top-2 tracks at each refill
+####### fill the playlist with 3 tracks reads:
+ArtistA	Song0	300
+ArtistA	Song0	300
+ArtistA	Song0	300
+ArtistB	Song1	200
+ArtistB	Song1	200
+ArtistC	Song2	400
+###### resulting in playlist:
+[(-2,{ArtistA,Song0,300,0}), (-1,{ArtistB,Song1,200,0}), (0,{ArtistC,Song2,400,0})] ###### initial filling with 3 tracks
+playing {ArtistA,Song0,300} ###### first played track (at time 0; beginning of the program)
+playing {ArtistB,Song1,200} ###### second played track (right after Song0, at time 300)
+###### 1 track (33% of capacity) remaining in the playlist => need to refill, but first dump the Top-2:
+Top-2: ##### first Top-2 report (both tracks has played once => order not important)
+ArtistB	Song1	0 ###### this is the last track played, so no waiting time
+ArtistA	Song0	200 ###### this is the first track played, so we have wait 200 seconds (time to listen to Song1) since it was played
+###### fill the playlist with 3 tracks, as there are still one track in it, reads:
+ArtistA	Song0	300
+ArtistA	Song0	300
+ArtistA	Song0	300
+ArtistD	Song3	300
+###### resulting in playlist:
+[(-2,{ArtistA,Song0,300,0}), (0,{ArtistC,Song2,400,0}), (0,{ArtistD,Song3,300,0})] ###### second filling, adding 2 tracks (Song2 was already in queue)
+playing {ArtistA,Song0,300} ###### third played track (at time 500)
+playing {ArtistD,Song3,300} ##### fourth played track (at time 800)
+###### 1 track (33% of capacity) remaining in the playlist => need to refill, but first dump the Top-2:
+Top-2: ###### second Top-2 report (Song0 has played twice with an average waiting time of 250; Song 3 has played last and for the first time, so no waiting time)
+ArtistA	Song0	250
+ArtistD	Song3	0
+###### fill the playlist with 3 tracks, as there are still one track in it, reads:
+ArtistE	Song4	100
+ArtistF	Song5	500
+###### resulting in playlist:
+[(0,{ArtistC,Song2,400,0}), (0,{ArtistE,Song4,100,0}), (0,{ArtistF,Song5,500,0})] ###### third filling, adding 2 tracks (Song2 was already in queue)
+playing {ArtistC,Song2,400} ###### fifth played track (at time 1100)
+playing {ArtistF,Song5,500} ###### sixth played track (at time 1500)
+###### 1 track (33% of capacity) remaining in the playlist => need to refill, but first dump the Top-2:
+Top-2: ###### third and last Top-2 report (Song 0 has played twice with now an average waiting time of 700, it did not play in the last sequence; Song5 has played last and for the first time, so no waiting time)
+ArtistA	Song0	700
+ArtistF	Song5	0
+###### end as we reached the number of fillings of 3
