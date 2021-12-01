@@ -18,7 +18,7 @@ import java.lang.IllegalArgumentException;
 
 public class FavoritesList<E extends Comparable<E>> {
     //----- inner class Item
-    protected static class Item<E extends Comparable<E>> implements Comparable<Item<E>> {
+    public static class Item<E extends Comparable<E>> implements Comparable<Item<E>> {
 	private E value;
 	private int count = 0;
 	public Item( E val ) { this.value = val; }
@@ -81,4 +81,14 @@ public class FavoritesList<E extends Comparable<E>> {
 	    result.addLast( iter.next().getValue() );
 	return result;
     }
+	
+	public Iterable<Item<E>> getFavoritesItem(int k) throws IllegalArgumentException{
+		if( k < 0 || k > this.size() )
+	    throw new IllegalArgumentException( "Invalid k = " + k );
+		PositionalList<Item<E>> result = new LinkedPositionalList<>();
+		Iterator<Item<E>> iter = this.list.iterator();
+		for( int j = 0; j < k; j++ )
+	    result.addLast( iter.next() );
+		return result;
+	}
 }

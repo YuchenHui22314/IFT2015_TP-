@@ -6,12 +6,12 @@ public class Playlist {
 
     // PQ represents the playlist.
     private HeapAdaptablePriorityQueue<Integer, Song> playlist;
+
     // array for positions. We have chosen array implementation
     // instead of a linkedlist by being aware of the fact that
     // the number of access to an element (traverse) in our list 
     // is bigger than the number of delete from the list.
     // (a track may be required several times but played only once)
-    
     private ArrayList <Entry<Integer,Song>> tokenArray;
     
     //capacity(upper bound)
@@ -28,7 +28,14 @@ public class Playlist {
     }
 
     public boolean insert(Song track){
-        int index = this.tokenArray.indexOf(track);
+        int index = -1;
+            
+        for (int i = 0; i < this.size() ; i++){
+            if (this.tokenArray.get(i).getValue().equals(track)){
+                index = i;
+                break;
+            }
+        }
         if (index >= 0){
             Entry<Integer,Song> entry= tokenArray.get(index);
             int priorityNum = entry.getKey()-1;
@@ -47,7 +54,13 @@ public class Playlist {
         return true;
     }
 
-    public Song 
+    public Song removeMin(){
+        //remove from playlist
+        Entry<Integer,Song> entryDel = this.playlist.removeMin();
+        //remove from tokenArray and extract the song
+        Song s = this.tokenArray.remove(this.tokenArray.indexOf(entryDel)).getValue();
+        return s;
+    }
 
 
     

@@ -2,6 +2,8 @@
  * MuzStream requests playlistCapacity playlistLimit numberofFillings K
  */
 import ca.umontreal.adt.list.FavoritesListMTF;
+import ca.umontreal.adt.list.List;
+import ca.umontreal.adt.list.FavoritesList.Item;
 import ca.umontreal.adt.queue.LinkedQueue;
 import ca.umontreal.adt.queue.Queue;
 import java.io.File;
@@ -17,24 +19,27 @@ public class MuzStream {
         int playlistLimit = Integer.parseInt(args[2]);
         int numberofFillings = Integer.parseInt(args[3]);
         int topK = Integer.parseInt(args[4]);
+        //output : firstline
+        String firstLine = ("MuzStream "+fileName+" " + playlistCapacity + " " 
+        + playlistLimit + " " + numberofFillings + " " + topK);
 
         //total time passed since the application is launched
         int timePassed;
         
         //list for stocking all the songs in the request file
-        Queue<Song> songList = new LinkedQueue()<>();
+        Queue<Song> songList = new LinkedQueue<>();
         
         //create a playlist.
-        Playlist playlist = new Playlist();
+        Playlist playlist = new Playlist(playlistCapacity);
 
         //crate a favoriteList for TOP-K song(s)
         FavoritesListMTF<Song> topKList = new FavoritesListMTF<>();
         
-
-        //fill the songlist by reading all the songs in the reauest file.
-        //code inspired by SimpleFastReader.java in the package
-        //ca.umontreal.maps
-        
+        /**
+         * fill the songlist by reading all the songs in the reauest file.
+         * code inspired by SimpleFastReader.java in the package
+         * ca.umontreal.maps
+         */
         try {
 	    File input = new File( fileName );
 	    Scanner reader = new Scanner( input );
@@ -51,9 +56,46 @@ public class MuzStream {
             System.out.println( "Something's wrong, file not found!" );
             e.printStackTrace();
 	    }
+        
+        //for the first time we just fill the list initially empty
+        //with playlistCapacity tracks.(if there are enough tracks
+        //in the songList)
+        while (!songList.isEmpty()) {
+            while (playlist.size() < playlistCapacity) {
+                playlist.insert(songList.dequeue()); 
+            }
+        }
+        
 
+        //refill cycle:
+        int refillTimes = 0;
+        while (refillTimes < numberofFillings) {
+            
+        }
         //debug
         //System.out.println(songList);
 
+    }
+    
+    /**
+     * IMPORTANT : I have modified the class FavoritesListMTF
+     * to adapt to our application. More specifically, I have changed
+     * the visibility of the innerClass Item<E> to get directly count number.
+     * I think it does not violate the priniciple of encapsulation, because
+     * we implement the class Item<E> as an inner static class just 
+     * for convenience. We could have implemented it as a public class independent
+     * of class FavoritesListMTF, which is almost equal to what I have modified.
+     */
+    public static void printTopK(FavoritesListMTF<Song> sf, int k, int time){
+        String result = "Top-" + k + ":\n";
+        Iterable<Item<Song>> songitems= sf.getFavoritesItem(k);
+        for (Item<Song> songitem : songitems) {
+            int playedTimes = songitem.getCount();
+            Song song = songitem.getValue();
+            result += (song.getArtist() + "\\t" + song.getSongName()
+            + "\\t" + (time-playedTimes*song.getTime())/playedTimes +"\n"); 
+            
+        }
+        System.out.println(result);
     }
 }
