@@ -4,12 +4,14 @@ public class Song implements Comparable<Song>{
     private String artist;
     private String songName;
     private int time;
+    private int firstTime;
     
     public Song(String[] infos){
        if (infos.length != 3) throw new IllegalArgumentException("not a song"); 
        this.artist = infos[0];
        this.songName = infos[1];
        this.time = Integer.parseInt(infos[2]);
+       this.firstTime = 0;
 
     }
     public String getArtist() {
@@ -34,6 +36,14 @@ public class Song implements Comparable<Song>{
 
     public void setTime(int time) {
         this.time = time;
+    }
+    
+    public void setFirstTime(int firstTime) {
+        this.firstTime = firstTime;
+    }
+
+    public int getFirstTime() {
+        return firstTime;
     }
 
     @Override

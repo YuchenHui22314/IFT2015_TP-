@@ -12,9 +12,9 @@ import java.util.Scanner;
 
 public class MuzStream {
 
-    public static void main(String[] arg) {
+    public static void main(String[] args) {
         //analyse arguments
-        String[] args = { "data/simple.input", "3", "33", "3", "2"};
+        //String[] args = { "data/simple.input", "3", "33", "3", "2"};
         String fileName = args[0];
         int playlistCapacity = Integer.parseInt(args[1]);
         int playlistLimit = Integer.parseInt(args[2]);
@@ -69,7 +69,7 @@ public class MuzStream {
             // ##### end of execution!!!!!!!!#####
             if (songListEmpty) {
                 while (playlist.size() >= 0){
-                    timePassed += play(topKList, playlist );
+                    timePassed += play(topKList, playlist, timePassed );
                 }
                 printTopK(topKList, topK, timePassed);
                 break;
@@ -77,7 +77,7 @@ public class MuzStream {
             // if songList is not exhausted, we will respect the playlistLimit
             while 
             (playlist.size() > Math.ceil((double)playlistLimit*playlistCapacity/(double)100)){
-                timePassed += play(topKList, playlist);
+                timePassed += play(topKList, playlist, timePassed);
 
             }
             printTopK(topKList, topK, timePassed);
@@ -101,13 +101,13 @@ public class MuzStream {
      * of class FavoritesListMTF, which is almost equal to what I have modified.
      */
     public static void printTopK(FavoritesListMTF<Song> sf, int k, int time){
-        String result = "Top-" + k + ":\n";
+        String result = "Top-" + k ;
         Iterable<Item<Song>> songitems= sf.getFavoritesItem(k);
         for (Item<Song> songitem : songitems) {
             int playedTimes = songitem.getCount();
             Song song = songitem.getValue();
-            result += (song.getArtist() + "\t" + song.getSongName()
-            + "\t" + (time-playedTimes*song.getTime())/playedTimes +"\n"); 
+            result += ("\n" + song.getArtist() + "\t" + song.getSongName()
+            + "\t" + (time-playedTimes*song.getTime()-song.getFirstTime())/playedTimes ); 
             
         }
         System.out.println(result);
@@ -134,9 +134,12 @@ public class MuzStream {
         return ss.isEmpty();
     }
 
-    public static int play(FavoritesListMTF<Song> flmtf, Playlist p ){
+    public static int play(FavoritesListMTF<Song> flmtf, Playlist p, int currentTime){
         Song s = p.removeMin();
         int addedTime = s.getTime();
+        if (s.getFirstTime() == 0){
+            s.setFirstTime(currentTime);
+        }
         flmtf.access(s);
         return addedTime;
     }
