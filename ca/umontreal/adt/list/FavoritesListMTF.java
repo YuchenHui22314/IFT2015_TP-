@@ -50,8 +50,11 @@ public class FavoritesListMTF<E extends Comparable<E>> extends FavoritesList<E> 
 
 // return an iterable collection of the k most frequently accessed elements
     public Iterable<Item<E>> getFavoritesItem( int k ) throws IllegalArgumentException {
-	if( k < 0 || k > this.size() )
+	if( k < 0 || k > this.size() ){
+
+		System.out.println(this.size());
 	    throw new IllegalArgumentException( "Invalid k = " + k );
+	}
 	// make a copy of the original list
 	PositionalList<Item<E>> tmp = new LinkedPositionalList<>();
 	for( Item<E> item : this.list )

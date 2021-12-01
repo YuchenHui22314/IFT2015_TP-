@@ -76,7 +76,7 @@ public class MuzStream {
             }
             // if songList is not exhausted, we will respect the playlistLimit
             while 
-            (playlist.size() > Math.ceil((double)playlistLimit*playlistCapacity/(double)100)){
+            (playlist.size()*100/playlistCapacity >= playlistLimit){
                 timePassed += play(topKList, playlist, timePassed);
 
             }
