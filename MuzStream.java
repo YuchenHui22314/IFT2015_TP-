@@ -2,7 +2,6 @@
  * MuzStream requests playlistCapacity playlistLimit numberofFillings K
  */
 import ca.umontreal.adt.list.FavoritesListMTF;
-import ca.umontreal.adt.list.List;
 import ca.umontreal.adt.list.FavoritesList.Item;
 import ca.umontreal.adt.queue.LinkedQueue;
 import ca.umontreal.adt.queue.Queue;
@@ -10,10 +9,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+
 public class MuzStream {
 
-    public static void main(String[] args) {
+    public static void main(String[] arg) {
         //analyse arguments
+        String[] args = { "data/simple.input", "3", "33", "3", "2"};
         String fileName = args[0];
         int playlistCapacity = Integer.parseInt(args[1]);
         int playlistLimit = Integer.parseInt(args[2]);
@@ -24,7 +25,7 @@ public class MuzStream {
         + playlistLimit + " " + numberofFillings + " " + topK);
 
         //total time passed since the application is launched
-        int timePassed;
+        int timePassed = 0;
         
         //list for stocking all the songs in the request file
         Queue<Song> songList = new LinkedQueue<>();
@@ -56,22 +57,35 @@ public class MuzStream {
             System.out.println( "Something's wrong, file not found!" );
             e.printStackTrace();
 	    }
-        
-        //for the first time we just fill the list initially empty
-        //with playlistCapacity tracks.(if there are enough tracks
-        //in the songList)
-        while (!songList.isEmpty()) {
-            while (playlist.size() < playlistCapacity) {
-                playlist.insert(songList.dequeue()); 
+        //firstLine of output
+        System.out.println(firstLine);
+        int fillTimes = 0;
+        //fill cycle:
+        while (true){
+            boolean songListEmpty = fillPlaylist(playlist, songList); 
+            fillTimes += 1;
+            // if songList run out of songs, we ignore the playlistLimit
+            // and exhauste the playlist and print the last Top-k
+            // ##### end of execution!!!!!!!!#####
+            if (songListEmpty) {
+                while (playlist.size() >= 0){
+                    timePassed += play(topKList, playlist );
+                }
+                printTopK(topKList, topK, timePassed);
+                break;
             }
-        }
-        
+            // if songList is not exhausted, we will respect the playlistLimit
+            while 
+            (playlist.size() > Math.ceil((double)playlistLimit*playlistCapacity/(double)100)){
+                timePassed += play(topKList, playlist);
 
-        //refill cycle:
-        int refillTimes = 0;
-        while (refillTimes < numberofFillings) {
-            
+            }
+            printTopK(topKList, topK, timePassed);
+            if (fillTimes >= numberofFillings) break;
+
+
         }
+            
         //debug
         //System.out.println(songList);
 
@@ -92,10 +106,38 @@ public class MuzStream {
         for (Item<Song> songitem : songitems) {
             int playedTimes = songitem.getCount();
             Song song = songitem.getValue();
-            result += (song.getArtist() + "\\t" + song.getSongName()
-            + "\\t" + (time-playedTimes*song.getTime())/playedTimes +"\n"); 
+            result += (song.getArtist() + "\t" + song.getSongName()
+            + "\t" + (time-playedTimes*song.getTime())/playedTimes +"\n"); 
             
         }
         System.out.println(result);
+    }
+
+
+    public static boolean fillPlaylist(Playlist p, Queue<Song> ss){
+        while (!ss.isEmpty()){
+            int length = p.size();
+            if (length < p.playlistCapacity) {
+               p.insert(ss.dequeue()); 
+            /*}else if (length == p.playlistCapacity){
+                boolean success = p.insert(ss.first());
+                if (!success){
+                    break;
+                }else{
+                    ss.dequeue();
+                }*/
+
+            }else{
+                break;
+            }
+        }
+        return ss.isEmpty();
+    }
+
+    public static int play(FavoritesListMTF<Song> flmtf, Playlist p ){
+        Song s = p.removeMin();
+        int addedTime = s.getTime();
+        flmtf.access(s);
+        return addedTime;
     }
 }
