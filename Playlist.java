@@ -12,6 +12,8 @@ public class Playlist {
     // the number of access to an element (traverse) in our list 
     // is bigger than the number of delete from the list.
     // (a track may be required several times but played only once)
+    //.................
+    //ok j'aurais du utiliser une list chainée au lieu d'une arraylist....
     private ArrayList <Entry<Integer,Song>> tokenArray;
     
     //capacity(upper bound)
@@ -26,7 +28,11 @@ public class Playlist {
     public int size (){
         return this.playlist.size();
     }
-
+    /**
+     *  first search in arraytoken to judge if the song have already been in
+     *  the playlist. If so we change its priority, otherwise we add it into
+     *  the playlist with priority 0.
+     */
     public boolean insert(Song track){
         int index = -1;
             

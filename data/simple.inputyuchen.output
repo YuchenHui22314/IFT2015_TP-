@@ -1,0 +1,10 @@
+MuzStream data/simple.input 3 33 3 2
+Top-2:
+ArtistB	Song1	0
+ArtistA	Song0	200
+Top-2:
+ArtistA	Song0	250
+ArtistD	Song3	0
+Top-2:
+ArtistA	Song0	700
+ArtistF	Song5	0
